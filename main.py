@@ -53,3 +53,4 @@ with mp_pose.Pose(min_detection_confidence=0.7, min_tracking_confidence=0.7) as 
             break
 capture.release() #when the loop ends, release the video
 
+
