@@ -1,3 +1,8 @@
+#libraries used: opencv, mediapipe
+#Initially written in python 3.8 on 7/17/22
+#owj25 on github, PROFILE: https://github.com/owj25 PROJECT REPO: https://github.com/owj25/push-up_counter
+#GNU GPL 3 license
+
 import cv2 #OpenCV
 import mediapipe as mp #MediaPipe
 
