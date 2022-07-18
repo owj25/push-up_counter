@@ -49,8 +49,10 @@ with mp_pose.Pose(min_detection_confidence=0.7, min_tracking_confidence=0.7) as 
         cv2.putText(image, 'Push-ups completed: % s' % count, posit, 0, 2, (255, 0, 0), 3, 15) #write the count on the output window
         cv2.imshow("pushup counter", image) #show the video feed
         key = cv2.waitKey(1)
-        if key == ord('q'): #create an exit condition: press q to end the code
+        if key == 27: #create an exit condition: the 'esc' key, previously 'q'
             break
-capture.release() #when the loop ends, release the video
+            cv2.destroyAllWindows() #destroy all OpenCV windows on esc key
+
+cv2.destroyAllWindows() #when the loop ends, destroy all OpenCV windows
 
 
