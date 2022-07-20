@@ -47,12 +47,12 @@ with mp_pose.Pose(min_detection_confidence=0.7, min_tracking_confidence=0.7) as 
             if len(imlist) != 0: #check to make sure that there are in fact coordinates that are found.
                 if imlist[12][2] and imlist[11][2] >= imlist[13][2] and imlist[14][2]: #check if you are in the "down" state
                     position = "down"
-                    os.system(" say 'down'") #dictate that you are in the "up" state
+                    #os.system(" say 'down'") #dictate that you are in the "up" state UPDATE: THIS FEATURE IS NOT YET COMPLETE(EXPERIMENTAL) IT WILL BE RE-IMPLIMENTED WHEN COMPLETE.
                 elif imlist[12][2] and imlist[11][2] <= imlist[13][2] and imlist[14][2] and position == "down": #check if you are in the "up" state and you were previously in the down state
                     position = "up"
                     count += 1 #increment the count of pushups
                     print("pushups completed:", count)
-                    os.system(" say 'up, % '" % count) # dictate that you are in the "down" state, say the number of pushups.
+                     #os.system(" say 'up, % '" % count) # dictate that you are in the "down" state, say the number of pushups.
         posit = ((int)(image.shape[1] / 3 - 268 / 2), (int)(image.shape[0] / 4 - 36 / 2)) #determine where to write the count of the pushups on the output window
         cv2.putText(image, 'Push-ups completed: % s' % count, posit, 0, 2, (255, 0, 0), 3, 15) #write the count on the output window
         cv2.imshow("pushup counter", image) #show the video feed
