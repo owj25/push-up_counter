@@ -5,6 +5,7 @@
 
 import cv2 #OpenCV
 import mediapipe as mp #MediaPipe
+import os #Operating System
 
 # defining various MediaPipe built in methods
 
@@ -14,13 +15,12 @@ mp_pose = mp.solutions.pose
 
 count = 0
 
-pos = None
-
 #create the video feed through the built in webcam
 capture = cv2.VideoCapture(0)
 
 #set the starting position of the pushup to "up"
 position = "up"
+said = False
 
 #the body of the code
 
@@ -46,10 +46,15 @@ with mp_pose.Pose(min_detection_confidence=0.7, min_tracking_confidence=0.7) as 
             if len(imlist) != 0: #check to make sure that there are in fact coordinates that are found.
                 if imlist[12][2] and imlist[11][2] >= imlist[13][2] and imlist[14][2]: #check if you are in the "down" state
                     position = "down" #declare that you are in the "down" state
+                    if not said: #make sure it won't repeatedly say 'down'
+                        os.system('say -v "karen" "down"') #say 'down' using terminal
+                        said = True #also to ensure it won't repeate 'down'
                 elif imlist[12][2] and imlist[11][2] <= imlist[13][2] and imlist[14][2] and position == "down": #check if you are in the "up" state and you were previously in the down state
                     position = "up" #declare that you are in the "up" state
                     count += 1 #increment the count of pushups
-                    print("pushups completed:", count)
+                    print("pushups completed:", count) #print num of pushups
+                    os.system('say -v "karen" "% s"' % count) #say the number of complete pushups
+                    said = False #reset so that it can say 'down' again
         posit = ((int)(image.shape[1] / 3 - 268 / 2), (int)(image.shape[0] / 4 - 36 / 2)) #determine where to write the count of the pushups on the output window
         cv2.putText(image, 'Push-ups completed: % s' % count, posit, 0, 2, (255, 0, 0), 3, 15) #write the count on the output window
         cv2.imshow("pushup counter", image) #show the video feed
