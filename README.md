@@ -14,3 +14,5 @@ USAGE:
 The program checks whether your shoulders are below your elbows; when the shoulders are below, you are in the "down" state, and when your elbows are above the shoulders you are in the "up" state. If you are detected to be in the "down" state, and you were previously in the "up" state, then the count is incremented by 1 and you are set to the down state. 
 
 Please note that the way it functions is by reading both elbows/shoulders, so the camera must be pointed such that you are facing it and it is angled nearly parallell to the ground. 
+
+I highly reccomend using headphones if you are on a mac – it will let you know when you reach the down position as well as count out loud.
